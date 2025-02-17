@@ -389,3 +389,61 @@ function hoursLeft(userId) {
     });
 }
 
+
+function submitData(){
+    if (document.getElementById("hoursleft").innerHTML>=0){
+        alert("Do you want to submit?");
+
+        const userTasksRef = db.collection("users").doc(userId).collection("tasks");
+        let totalhour1 = 0;
+        let promises = [
+            userTasksRef.doc("daily").get(),
+            userTasksRef.doc("today").get()
+        ];
+
+        Promise.all(promises).then(docs => {
+            docs.forEach(doc => {
+                if (doc.exists) {
+                    let taskData = doc.data();
+
+                    for (const [taskName, taskInfo] of Object.entries(taskData)) {   
+                        var today = new Date();
+                        var dd = String(today.getDate()).padStart(2, '0');
+                        var mm = String(today.getMonth() + 1).padStart(2, '0');
+                        var yyyy = today.getFullYear();
+
+                        today = mm + dd + yyyy;
+                        const userTasksRef = db.collection("users").doc(user.uid).collection("total").doc(today);
+
+                        userTasksRef.set({
+                            [taskName]: taskInfo
+                        }, { merge: true })
+                        .then(() => {
+                            console.log("Task added successfully!");
+                        })
+                        .catch(error => console.error("Error adding task:", error)); 
+                        
+                        totalhour1 += taskInfo;
+                    }
+                    if (24-totalhour1 >0){
+                        userTasksRef.set({
+                            ["Free Time"]: 24-totalhour1
+                        }, { merge: true })
+                        .then(() => {
+                        
+                        })
+                        .catch(error => console.error("Error adding task:", error)); 
+                        
+                    }
+                    
+                }
+            });
+        
+
+        
+        }).catch(error => {
+            console.error("Error fetching tasks:", error);
+        });
+    }
+    
+}
