@@ -387,12 +387,21 @@ function hoursLeft(userId) {
     }).catch(error => {
         console.error("Error fetching tasks:", error);
     });
+
 }
 
 
-function submitData(){
-    if (document.getElementById("hoursleft").innerHTML>=0){
-        alert("Do you want to submit?");
+function submitData() {
+    const user = auth.currentUser;
+    if (!user) {
+        console.error("No user is signed in.");
+        return;
+    }
+
+    const userId = user.uid;
+    
+    if (Number(document.getElementById("hoursleft").innerHTML.split(" ")[0]) >= 0) {
+        console.log("Do you want to submit?");
 
         const userTasksRef = db.collection("users").doc(userId).collection("tasks");
         let totalhour1 = 0;
@@ -405,45 +414,43 @@ function submitData(){
             docs.forEach(doc => {
                 if (doc.exists) {
                     let taskData = doc.data();
-
-                    for (const [taskName, taskInfo] of Object.entries(taskData)) {   
-                        var today = new Date();
+                    var today = new Date();
                         var dd = String(today.getDate()).padStart(2, '0');
                         var mm = String(today.getMonth() + 1).padStart(2, '0');
                         var yyyy = today.getFullYear();
-
                         today = mm + dd + yyyy;
-                        const userTasksRef = db.collection("users").doc(user.uid).collection("total").doc(today);
 
-                        userTasksRef.set({
+                    for (const [taskName, taskInfo] of Object.entries(taskData)) {   
+                        
+
+                        // Corrected: Changed variable name to avoid conflicts
+                        const userTotalRef = db.collection("users").doc(userId).collection("total").doc(today);
+
+                        userTotalRef.set({
                             [taskName]: taskInfo
                         }, { merge: true })
                         .then(() => {
-                            console.log("Task added successfully!");
+                            console.log(`Task ${taskName} added successfully!`);
                         })
                         .catch(error => console.error("Error adding task:", error)); 
                         
                         totalhour1 += taskInfo;
                     }
-                    if (24-totalhour1 >0){
-                        userTasksRef.set({
-                            ["Free Time"]: 24-totalhour1
+
+                    if (24 - totalhour1 > 0) {
+                        const userTotalRef = db.collection("users").doc(userId).collection("total").doc(today);
+                        userTotalRef.set({
+                            ["Free Time"]: 24 - totalhour1
                         }, { merge: true })
                         .then(() => {
-                        
+                            console.log("Free Time updated successfully!");
                         })
-                        .catch(error => console.error("Error adding task:", error)); 
-                        
+                        .catch(error => console.error("Error adding Free Time:", error)); 
                     }
-                    
                 }
             });
-        
-
-        
         }).catch(error => {
             console.error("Error fetching tasks:", error);
         });
     }
-    
 }
