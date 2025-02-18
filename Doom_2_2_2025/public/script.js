@@ -26,6 +26,22 @@ document.addEventListener("DOMContentLoaded", event => {
     var yyyy = today.getFullYear();
 
     today = mm + '/' + dd + '/' + yyyy;
+    today2 = mm+dd+yyyy;
+    
+    const userTotalRef = db.collection("users").doc(userId).collection("total").doc(today2);
+    userTotalRef.get().then((doc) => {
+        alert("hi")
+        if (doc.exists) {
+            console.log("Document exists:", doc.data());
+            //hide the button!
+        } else {
+            console.log("Document does not exist.");
+            document.getElementById("submitbut").style.display = "block";
+        }
+    }).catch((error) => {
+        console.error("Error checking document:", error);
+    });
+
     document.getElementById("currentday").innerHTML = today;
     console.log("current day: " + today);
 });

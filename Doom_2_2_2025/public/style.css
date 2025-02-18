@@ -171,9 +171,9 @@ button {
   min-height: fit-content;
   transition: background-color 0.3s;
 }
-button[disabled=disabled], button:disabled {
-  background: #395d7f;
-}
+
+
+
 
 button:hover {
   background: #005bbf;
@@ -228,4 +228,11 @@ button:hover {
 
 .text-container button{
   padding:6px;
+}
+
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
 }
