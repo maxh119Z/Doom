@@ -171,6 +171,13 @@ button {
   min-height: fit-content;
   transition: background-color 0.3s;
 }
+#submitbut {
+  margin-top:15px;
+  padding: 14px 12px;  /* Less vertical space */
+  line-height: 1;      /* Reduce extra spacing inside */
+  height: auto;        /* Let content decide height */
+  font-size: 14px;     /* Adjust text size if needed */
+}
 
 
 
@@ -230,9 +237,11 @@ button:hover {
   padding:6px;
 }
 
-button:disabled,
-button[disabled]{
-  border: 1px solid #999999;
-  background-color: #cccccc;
-  color: #666666;
+footer{
+  display:flex;
+  gap:20px;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
 }
+

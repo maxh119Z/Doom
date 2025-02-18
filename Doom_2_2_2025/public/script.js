@@ -26,22 +26,6 @@ document.addEventListener("DOMContentLoaded", event => {
     var yyyy = today.getFullYear();
 
     today = mm + '/' + dd + '/' + yyyy;
-    today2 = mm+dd+yyyy;
-    
-    const userTotalRef = db.collection("users").doc(userId).collection("total").doc(today2);
-    userTotalRef.get().then((doc) => {
-        alert("hi")
-        if (doc.exists) {
-            console.log("Document exists:", doc.data());
-            //hide the button!
-        } else {
-            console.log("Document does not exist.");
-            document.getElementById("submitbut").style.display = "block";
-        }
-    }).catch((error) => {
-        console.error("Error checking document:", error);
-    });
-
     document.getElementById("currentday").innerHTML = today;
     console.log("current day: " + today);
 });
@@ -79,6 +63,27 @@ function updateUI(user) {
         loginButton.innerText = "Login";
         document.getElementById("taskList").innerHTML = ""; 
     }
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    today2 = mm+dd+yyyy;
+    
+    const userId = auth.currentUser.uid;
+    const userTotalRef = db.collection("users").doc(userId).collection("total").doc(today2);
+    userTotalRef.get().then((doc) => {
+        if (doc.exists) {
+            console.log("Document exists:", doc.data());
+           
+        } else {
+            console.log("Document does not exist.");
+            document.getElementById("submitbut").setAttribute("style", "display: block !important;");
+
+        }
+    }).catch((error) => {
+        console.error("Error checking document:", error);
+    });
+
 }
 
 auth.onAuthStateChanged(user => {
@@ -465,8 +470,14 @@ function submitData() {
                     }
                 }
             });
+            document.getElementById("submitbut").style.display = "none";
         }).catch(error => {
             console.error("Error fetching tasks:", error);
         });
     }
+    else{
+        alert("are you acustic you need positive hours left >=0")
+    }
+
+    
 }
