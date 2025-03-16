@@ -1,3 +1,4 @@
+
 const firebaseConfig = {
     apiKey: "AIzaSyBWTBXLPQAUsSbnKRO12plCujj_RbJl4Tw",
     authDomain: "doom-9a78a.firebaseapp.com",
@@ -87,20 +88,43 @@ function averageData() {
         if (window.myPieChart) {
             window.myPieChart.destroy();
         }
-        window.myPieChart = new Chart("myChart", {
+
+        const ctx = document.getElementById("myChart");
+        Chart.register(ChartDataLabels);
+
+        window.myPieChart = new Chart(ctx, {
             type: "pie",
             data: {
                 labels: xValues,
                 datasets: [{
                     backgroundColor: newBarColors,
-                    data: yValues 
+                    data: yValues
                 }]
             },
             options: {
                 maintainAspectRatio: false,
-                title: {
-                    display: true,
-                    text: "Average spending"
+                plugins: {
+                    datalabels: {
+                        color: "white",
+                        anchor: "end",
+                        align: "start",
+                        font: {
+                            weight: "bold",
+                            size: 10
+                        },
+                        formatter: (value, ctx) => {
+                            // Get the chart's total sum
+                            const total = ctx.chart.data.datasets[0].data.reduce((acc, val) => acc + parseFloat(val), 0);
+                            const percentage = (value / total) * 100; // Calculate percentage
+
+                            // Only show labels if segment is big enough (> 5% of the pie)
+                            if (percentage > 5) {
+                                let label = ctx.chart.data.labels[ctx.dataIndex];
+                                return `${label}: ${value}`;
+                            }
+                            return ""; // Hide label if segment is too small
+                        }
+                    }
                 }
             }
         });
