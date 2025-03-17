@@ -36,11 +36,16 @@
             </div>
           </header>
 
-          <button onclick = "averageData()">ShowData</button>
+          <button id = "hello" onclick = "averageData()">ShowData</button>
+          <input name="task_value" type="text" maxlength="512" id="task2" class="taskField" placeholder="Age"/>
           
-          <ul id = "avlist"></ul>
           
-          <div id = "taskgraph"><canvas id="myChart"></canvas></div>
+          
+          <div id = "taskgraph">
+            <canvas id="myChart"></canvas>
+            <h1>Assuming you live to be 90 years old... Click Show Data</h1>
+            <ul id = "avlist"></ul>
+          </div>
 
           <script defer src = "data.js"></script>
     </body>

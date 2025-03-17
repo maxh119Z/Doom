@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Quicksand:wght@400;600&family=Nunito:wght@300;600&display=swap');
+
+
 * {
   margin: 0;
   padding: 0;
@@ -139,11 +142,15 @@ html, body {
 }
 #taskgraph{
   height:80%;
-  width:100%;
-  justify-content: center;
+  width:75%;
+  
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
   display:flex;
-  padding-bottom:20px;
+  gap:35px;
+  margin: 0 auto;
+  margin-top:60px;
 }
 
 .taskField {
@@ -245,3 +252,45 @@ footer{
   align-items: center;
 }
 
+#hello{
+  position:fixed;
+  left:15px;
+  top:80px;
+
+}
+
+#task2{
+  position:fixed;
+  left:120px;
+  top:80px;
+}
+
+#avlist {
+  list-style-type: none;
+  padding: 0;
+  margin-top:-15px;
+  font-family: 'Poppins', 'Quicksand', 'Nunito', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #111; /* Deep black for a bold look */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+#avlist li {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 12px 18px;
+  margin-bottom: 10px;
+  border-radius: 12px; /* Rounded edges */
+  transition: all 0.3s ease-in-out;
+  letter-spacing: 0.5px;
+}
+
+#avlist li:hover {
+  background: rgba(255, 255, 255, 0.4);
+  transform: scale(1.05);
+}
+
+.blue-text {
+  color: rgb(78, 169, 255);
+  font-weight: bold;
+}
