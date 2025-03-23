@@ -55,7 +55,7 @@ html, body {
 /* Buttons */
 .bluebutton {
   font-size: 1rem;
-  padding: 10px 16px;
+  padding: 10px 17px;
   border: none;
   border-radius: 6px;
   background: linear-gradient(90deg, #0084ff, #1fa3ff);
@@ -150,7 +150,7 @@ html, body {
   display:flex;
   gap:35px;
   margin: 0 auto;
-  margin-top:60px;
+  margin-top:10px;
 }
 
 .taskField {
@@ -168,6 +168,7 @@ html, body {
 }
 
 button {
+
   padding: 10px;
   font-size: 1rem;
   border: none;
@@ -252,18 +253,7 @@ footer{
   align-items: center;
 }
 
-#hello{
-  position:fixed;
-  left:15px;
-  top:80px;
 
-}
-
-#task2{
-  position:fixed;
-  left:120px;
-  top:80px;
-}
 
 #avlist {
   list-style-type: none;
@@ -293,4 +283,21 @@ footer{
 .blue-text {
   color: rgb(78, 169, 255);
   font-weight: bold;
+}
+
+
+
+#task2{
+  min-width:75px;
+  max-width:20%;
+
+}
+#butcont{
+  width:100%;
+  display:flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-top:20px;
+  gap:20px;
+  padding-left:20px;
 }
