@@ -56,6 +56,7 @@ html, body {
 .bluebutton {
   font-size: 1rem;
   padding: 10px 17px;
+
   border: none;
   border-radius: 6px;
   background: linear-gradient(90deg, #0084ff, #1fa3ff);
@@ -91,7 +92,8 @@ html, body {
 }
 
 #container2 h1 {
-  font-size: 1.6rem;
+  font-size: 1.3rem;
+  
   font-weight: bold;
   margin-bottom: 20px;
 }
@@ -99,6 +101,7 @@ html, body {
 #taskList {
   list-style: none;
   max-height:58vh;
+  overflow-x:hidden;
   overflow-y:scroll;
 }
 
@@ -126,6 +129,7 @@ html, body {
 #container2_2 {
   width: 50%;
   background: #f0f0f0;
+  overflow-x:hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -140,10 +144,20 @@ html, body {
   width: 100%;
   height:10%;
 }
+
+#atask{
+  max-width: 33%;
+}
+#atask2{
+  max-width: 33%;
+}
+#myChart{
+  width:100%;
+  height:100%;
+}
 #taskgraph{
   height:80%;
-  width:75%;
-  
+  width:75%;  
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -159,6 +173,7 @@ html, body {
   border: 2px solid #ccc;
   border-radius: 6px;
   font-size: 1rem;
+  max-width:50%;
   transition: border-color 0.3s;
 }
 
@@ -238,6 +253,7 @@ button:hover {
 }
 
 #hoursleft{
+  font-size:1rem;
   margin-top:20px;
 }
 
@@ -248,6 +264,7 @@ button:hover {
 footer{
   display:flex;
   gap:20px;
+  overflow-x:hidden;
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
@@ -300,4 +317,8 @@ footer{
   padding-top:20px;
   gap:20px;
   padding-left:20px;
+}
+
+header{
+  overflow-x:hidden;
 }
